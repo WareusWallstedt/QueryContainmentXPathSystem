@@ -1,0 +1,17 @@
+document     ::= prolog element s*
+prolog       ::= ('<?xml' s 'version' s? '=' s?
+                  (("'" '1.' [0-9]* "'") | ('"' '1.' [0-9]* '"'))
+                  [^?]* '?>'
+                 )?
+                 s?
+                 ('<!DOCTYPE' s name s ExtID s? [^>]* '>' s?)?
+element      ::= EmptyElemTag | STag content ETag
+EmptyElemTag ::= '<' name [^/]* '/>'
+STag         ::= '<' name [^>]* '>'
+ETag         ::= '</' name s? '>'
+content      ::= CharData? (element CharData?)*
+CharData     ::= [^<]*
+s            ::= (#x20 | #x9 | #xD | #xA)+
+name         ::= (':' | [A-Z] | '_' | [a-z])
+                 (':' | [A-Z] | '_' | [a-z] | '-' | [0-9] | '.')*
+ExtID        ::= 'SYSTEM' s ( ("'" [^']* "'") | ('"' [^"]* '"') )

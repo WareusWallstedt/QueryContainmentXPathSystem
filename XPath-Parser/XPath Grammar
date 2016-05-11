@@ -1,0 +1,6 @@
+XPath ::= expr
+expr  ::= ('/' | '//')? (name | '*') pred* step?
+name  ::= (':' | [A-Z] | '_' | [a-z])
+          (':' | [A-Z] | '_' | [a-z] | '-' | [0-9] | '.')*
+pred  ::= '[' expr ']'
+step  ::= ('/' | '//') (name | '*') pred* step?

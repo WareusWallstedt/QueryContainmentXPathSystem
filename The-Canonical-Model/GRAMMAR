@@ -1,0 +1,10 @@
+expr      ::= '/'? label predicate* subexpr?
+
+label     ::= [a-zA-Z] [a-zA-Z0-9]*   // Max 1024 characters
+
+predicate ::= '[' subexpr ']'
+
+subexpr   ::= '/' label predicate* subexpr?
+            | '/' '*' predicate* subexpr?
+            | '//' label predicate* subexpr?
+            | '//' '*' predicate* subexpr?
